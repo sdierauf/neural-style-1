@@ -2,6 +2,10 @@ import vgg
 
 import tensorflow as tf
 import numpy as np
+import time
+
+current_milli_time = lambda: int(round(time.time() * 1000))
+timenow = current_milli_time()
 
 from sys import stderr
 
@@ -95,9 +99,10 @@ def stylize(network, initial, content, styles, iterations,
 
         # optimizer setup
         train_step = tf.train.AdamOptimizer(learning_rate).minimize(loss)
-
         def print_progress(i, last=False):
-            stderr.write('Iteration %d/%d\n' % (i + 1, iterations))
+            global timenow
+            stderr.write('Iteration %d/%d, time: %dms\n' % (i + 1, iterations, current_milli_time() - timenow))
+            timenow = current_milli_time()
             if last or (print_iterations and i % print_iterations == 0):
                 stderr.write('  content loss: %g\n' % content_loss.eval())
                 stderr.write('    style loss: %g\n' % style_loss.eval())
