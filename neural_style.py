@@ -9,11 +9,11 @@ import math
 from argparse import ArgumentParser
 
 # default arguments
-CONTENT_WEIGHT = 5e0
+CONTENT_WEIGHT = 1e3
 STYLE_WEIGHT = 1e2
 TV_WEIGHT = 1e2
 LEARNING_RATE = 1e1
-STYLE_SCALE = 1.0
+STYLE_SCALE = 0.6
 ITERATIONS = 1000
 VGG_PATH = 'imagenet-vgg-verydeep-19.mat'
 
